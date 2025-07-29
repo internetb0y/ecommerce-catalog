@@ -1,15 +1,9 @@
 <!-- filepath: App.vue -->
 <template>
   <div id="app">
-    <ManSection />
-    <WomanSection />
+    <ManSection :products="menProducts"/>
+    <WomanSection :products="womenProducts"/>
     <UnavailableProduct />
-    
-    <ul v-for="product in products" :key="product.id">
-      <li >
-        {{ product }}
-      </li>
-    </ul>
   </div>
 </template>
 
@@ -30,11 +24,31 @@ export default {
       products: []
     }
   },
+  computed: {
+    filteredProducts() {
+      return this.products.filter(
+        product =>
+          product.category === "men's clothing" ||
+          product.category === "women's clothing"
+      );
+    },
+    menProducts() {
+      return this.products.filter(
+        product => product.category === "men's clothing"
+      );
+    },
+    womenProducts() {
+      return this.products.filter(
+        product => product.category === "women's clothing"
+      );
+    }
+  },
   created() {
     fetch('https://fakestoreapi.com/products')
       .then(response => response.json())
       .then(data => {
         this.products = data;
+        console.log('Filtered Products:', this.filteredProducts);
       })
       .catch(error => {
         console.error('Error fetching products:', error);

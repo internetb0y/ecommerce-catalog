@@ -1,10 +1,28 @@
 <template>
-    <h1>Man</h1>
+    <div>
+      <ul v-if="products && products.length">
+        <li v-for="product in products" :key="product.id">
+          <h2>{{ product.title }}</h2>
+          <p>{{ product.category }}</p>
+          <p>{{ product.description }}</p>
+          <p>Price: ${{ product.price }}</p>
+          <p>{{ product.rating.rate }} {{ product.rating.count }}</p>
+          <img :src="product.image" alt="Product Image" />
+        </li>
+      </ul>
+      <p v-else>No men's products available.</p>
+    </div>
 </template>
 
 <script>
 export default {
   name: 'ManSection',
+  props: {
+    products: {
+      type: Array,
+      required: true
+    }
+  }
 };
 </script>
 
