@@ -4,6 +4,12 @@
     <ManSection />
     <WomanSection />
     <UnavailableProduct />
+    
+    <ul v-for="product in products" :key="product.id">
+      <li >
+        {{ product }}
+      </li>
+    </ul>
   </div>
 </template>
 
@@ -18,6 +24,21 @@ export default {
     ManSection,
     WomanSection,
     UnavailableProduct
+  },
+  data() {
+    return {
+      products: []
+    }
+  },
+  created() {
+    fetch('https://fakestoreapi.com/products')
+      .then(response => response.json())
+      .then(data => {
+        this.products = data;
+      })
+      .catch(error => {
+        console.error('Error fetching products:', error);
+      });
   }
 }
 </script>
