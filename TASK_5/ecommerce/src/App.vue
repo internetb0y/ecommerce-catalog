@@ -1,17 +1,23 @@
 <!-- filepath: App.vue -->
 <template>
   <div id="app">
-    <MyComponent />
+    <ManSection />
+    <WomanSection />
+    <UnavailableProduct />
   </div>
 </template>
 
 <script>
-import MyComponent from './components/MyComponent.vue'
+import ManSection from './components/SectionMan.vue'
+import WomanSection from './components/SectionWoman.vue'
+import UnavailableProduct from './components/UnavailableProduct.vue'
 
 export default {
   name: 'App',
   components: {
-    MyComponent
+    ManSection,
+    WomanSection,
+    UnavailableProduct
   }
 }
 </script>
