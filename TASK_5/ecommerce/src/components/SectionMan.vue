@@ -58,8 +58,13 @@ export default {
   },
   methods: {
     nextProduct() {
-      if (this.products && this.products.length) {
-        this.currentIndex = (this.currentIndex + 1) % this.products.length;
+      if (this.products && this.products.length > 0) {
+        if (this.currentIndex === this.products.length - 1) {
+          this.currentIndex = 0;
+          this.$emit('next-category');
+        } else {
+          this.currentIndex++;
+        }
       }
     }
   }
@@ -67,7 +72,6 @@ export default {
 </script>
 
 <style scoped>
-
 .section-bg {
   /* Layout */
   display: flex;

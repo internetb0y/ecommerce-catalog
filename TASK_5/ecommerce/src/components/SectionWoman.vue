@@ -3,7 +3,7 @@
       <div class="product-card">
         <div v-if="products && products.length" class="card-content">
           <div class="card-image">
-            <img :src="currentProduct.image" alt="Man Product Image" />
+            <img :src="currentProduct.image" alt="Woman Product Image" />
           </div>
           <div class="card-detail">
             <div class="card-title">
@@ -32,14 +32,14 @@
             </div>
           </div>
         </div>
-        <p v-else class="no-products">No men's products available.</p>
+        <p v-else class="no-products">No women's products available.</p>
       </div>
     </div>
 </template>
 
 <script>
 export default {
-  name: 'ManSection',
+  name: 'WomanSection',
   props: {
     products: {
       type: Array,
@@ -58,8 +58,13 @@ export default {
   },
   methods: {
     nextProduct() {
-      if (this.products && this.products.length) {
-        this.currentIndex = (this.currentIndex + 1) % this.products.length;
+      if (this.products && this.products.length > 0) {
+        if (this.currentIndex === this.products.length - 1) {
+          this.currentIndex = 0;
+          this.$emit('next-category');
+        } else {
+          this.currentIndex++;
+        }
       }
     }
   }
@@ -67,7 +72,6 @@ export default {
 </script>
 
 <style scoped>
-
 .section-bg {
   /* Layout */
   display: flex;
@@ -81,7 +85,7 @@ export default {
   padding: 0;
 
   /* Background */
-  background-color: #D6E6FF;
+  background-color: #FDE2FF;
 }
 
 .product-card {
