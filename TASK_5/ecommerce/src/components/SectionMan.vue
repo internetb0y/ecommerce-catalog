@@ -1,40 +1,39 @@
 <template>
-    <div class="section-bg">
-      <div class="product-card">
-        <div v-if="products && products.length" class="card-content">
-          <div class="card-image">
-            <img :src="currentProduct.image" alt="Man Product Image" />
-          </div>
-          <div class="card-detail">
-            <div class="card-title">
-              <h2>{{ currentProduct.title }}</h2>
-              <div class="card-info">
-                <span class="category">{{ currentProduct.category }}</span>
-                <span class="rating">
-                  <span class="rate">{{ currentProduct.rating.rate }}/5</span>
-                  <span class="circles">
-                    <span v-for="i in 5" :key="i" :class="['circle', i <= Math.round(currentProduct.rating.rate) ? 'filled' : '']"></span>
-                  </span>
+  <div class="section-bg">
+    <div class="product-card">
+      <div v-if="products && products.length" class="card-content">
+        <div class="card-image">
+          <img :src="currentProduct.image" alt="Man Product Image" />
+        </div>
+        <div class="card-detail">
+          <div class="card-title">
+            <h2>{{ currentProduct.title }}</h2>
+            <div class="card-info">
+              <span class="category">{{ currentProduct.category }}</span>
+              <span class="rating">
+                <span class="rate">{{ currentProduct.rating.rate }}/5</span>
+                <span class="circles">
+                  <span v-for="i in 5" :key="i" :class="['circle', i <= Math.round(currentProduct.rating.rate) ? 'filled' : '']"></span>
                 </span>
-              </div>
+              </span>
             </div>
-            <div class="card-desc">
-              <p>{{ currentProduct.description }}</p>
+          </div>
+          <div class="card-desc">
+            <p>{{ currentProduct.description }}</p>
+          </div>
+          <div class="card-bottom">
+            <div class="card-price">
+              <span>${{ currentProduct.price }}</span>
             </div>
-            <div class="card-bottom">
-              <div class="card-price">
-                <span>${{ currentProduct.price }}</span>
-              </div>
-              <div class="card-btns">
-                <button class="buy-btn">Buy now</button>
-                <button class="next-btn" @click="nextProduct">Next product</button>
-              </div>
+            <div class="card-btns">
+              <button class="buy-btn">Buy now</button>
+              <button class="next-btn" @click="nextProduct">Next product</button>
             </div>
           </div>
         </div>
-        <p v-else class="no-products">No men's products available.</p>
       </div>
     </div>
+  </div>
 </template>
 
 <script>
@@ -278,6 +277,7 @@ export default {
 
 .buy-btn {
   /* Box Model */
+  width: 50%;
   padding: 10px 72px;
   border: 3px solid #002772;
   border-radius: 6px;
@@ -298,6 +298,7 @@ export default {
 
 .buy-btn:hover {
   /* Box Model */
+  width: 50%;
   padding: 10px 72px;
   border: 3px solid #002772;
   border-radius: 6px;
@@ -314,6 +315,7 @@ export default {
 
 .next-btn {
   /* Box Model */
+  width: 50%;
   padding: 10px 64px;
   border: 3px solid #002772;
   border-radius: 6px;
@@ -334,6 +336,7 @@ export default {
 
 .next-btn:hover {
   /* Box Model */
+  width: 50%;
   padding: 10px 64px;
   border: 3px solid #002772;
   border-radius: 6px;
@@ -346,15 +349,5 @@ export default {
 
   /* Background */
   background: #002772;
-}
-
-.no-products {
-  /* Box Model */
-  margin: 32px 0;
-
-  /* Typography */
-  font-size: 1.1rem;
-  text-align: center;
-  color: #1a2a4f;
 }
 </style>
