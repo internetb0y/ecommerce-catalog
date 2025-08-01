@@ -12,8 +12,8 @@
         @next-category="switchCategory"
       />
       <UnavailableProduct
-        v-else
-        :products="menProducts"
+        v-else-if="currentCategory === 'unavailable'"
+        :products="products"
         @next-category="switchCategory"
       />
     </div>
@@ -38,7 +38,7 @@ export default {
   data() {
     return {
       products: [],
-      currentCategory: 'unavailable'
+      currentCategory: 'men'
     }
   },
   computed: {
@@ -55,7 +55,7 @@ export default {
   },
   methods: {
     switchCategory() {
-      this.currentCategory = this.currentCategory === 'men' ? 'women' : 'men';
+      this.currentCategory = (this.currentCategory === 'men') ? 'women' : (this.currentCategory === 'women') ? 'men' : 'unvailable';
       console.log(`Switched to ${this.currentCategory}'s products.`);
     }
   },

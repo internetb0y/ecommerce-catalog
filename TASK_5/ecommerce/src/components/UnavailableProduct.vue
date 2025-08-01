@@ -23,7 +23,7 @@ export default {
   },
   data() {
     return {
-      currentIndex: 3
+      currentIndex: this.products.length - 1
     };
   },
   computed: {
