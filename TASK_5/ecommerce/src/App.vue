@@ -1,20 +1,8 @@
 <template>
   <div id="app">
     <div v-if="products.length > 0">
-      <ManSection
-        v-if="currentCategory === 'men'"
-        :products="menProducts"
-        @next-category="switchCategory"
-      />
-      <WomanSection
-        v-else-if="currentCategory === 'women'"
-        :products="womenProducts"
-        @next-category="switchCategory"
-      />
-      <UnavailableProduct
-        v-else-if="currentCategory === 'unavailable'"
-        :products="products"
-        @next-category="switchCategory"
+      <AllSection 
+        :products="filteredProducts"
       />
     </div>
     <div v-else class="loading-message">
@@ -24,39 +12,25 @@
 </template>
 
 <script>
-import ManSection from './components/SectionMan.vue'
-import WomanSection from './components/SectionWoman.vue'
-import UnavailableProduct from './components/UnavailableProduct.vue'
+import AllSection from './components/AllSection.vue'
 
 export default {
   name: 'App',
   components: {
-    ManSection,
-    WomanSection,
-    UnavailableProduct
+    AllSection
   },
   data() {
     return {
-      products: [],
-      currentCategory: 'men'
+      products: []
     }
   },
   computed: {
-    menProducts() {
+    filteredProducts() {
       return this.products.filter(
-        product => product.category === "men's clothing"
+        product =>
+          product.category === "men's clothing" ||
+          product.category === "women's clothing"
       );
-    },
-    womenProducts() {
-      return this.products.filter(
-        product => product.category === "women's clothing"
-      );
-    }
-  },
-  methods: {
-    switchCategory() {
-      this.currentCategory = (this.currentCategory === 'men') ? 'women' : (this.currentCategory === 'women') ? 'men' : 'unvailable';
-      console.log(`Switched to ${this.currentCategory}'s products.`);
     }
   },
   created() {
