@@ -33,7 +33,7 @@
               <span>${{ currentProduct.price }}</span>
             </div>
             <div class="card-btns">
-              <button class="buy-btn">Buy now</button>
+              <button :class="buyBtnClass">Buy now</button>
               <button :class="nextBtnClass" @click="nextProduct">Next product</button>
             </div>
           </div>
@@ -81,6 +81,11 @@ export default {
       if (this.currentProduct.category === "men's clothing") return 'card-price men-price';
       if (this.currentProduct.category === "women's clothing") return 'card-price women-price';
       return 'card-price';
+    },
+    buyBtnClass() {
+      if (this.currentProduct.category === "men's clothing") return 'buy-btn men-btn';
+      if (this.currentProduct.category === "women's clothing") return 'buy-btn women-btn';
+      return 'buy-btn';
     },
     nextBtnClass() {
       if (this.isUnavailable) return 'next-btn unavailable-btn';
@@ -140,80 +145,6 @@ export default {
 .section-bg.men-bg { background-color: #D6E6FF; }
 .section-bg.women-bg { background-color: #FDE2FF; }
 .section-bg.unavailable-bg { background-color: #DCDCDC; }
-
-.card-title h2 {
-  /* Box Model */
-  margin: 0 0 5px 0;
-
-  /* Typography */
-  font-family: "Inter", sans-serif;
-  font-size: 28px;
-  font-weight: 600;
-  color: #002772;
-}
-.card-title.men-title h2 { color: #002772; }
-.card-title.women-title h2 { color: #720060; }
-
-.card-price {
-  padding: 10px 0;
-  border-top: 1px solid #00000033;
-  font-family: "Inter", sans-serif;
-  font-size: 28px;
-  font-weight: 600;
-}
-.card-price.men-price { color: #002772; }
-.card-price.women-price { color: #720060; }
-
-.circle {
-  display: inline-block;
-  width: 18px;
-  height: 18px;
-  border-radius: 50%;
-  background: #ffffff;
-}
-.circle.men-circle { border: 1px solid #002772; }
-.circle.men-circle.filled { background: #002772; border: 1px solid #002772; }
-.circle.women-circle { border: 1px solid #720060; }
-.circle.women-circle.filled { background: #720060; border: 1px solid #720060; }
-.circle.filled { background: #002772; border: 1px solid #002772; }
-
-.next-btn {
-  width: 50%;
-  padding: 10px 64px;
-  border-radius: 6px;
-  font-family: "Inter", sans-serif;
-  font-size: 20px;
-  font-weight: 600;
-  cursor: pointer;
-  transition: 0.3s;
-  border: 3px solid #002772;
-  color: #002772;
-  background: #fff;
-}
-.next-btn.men-btn {
-  border: 3px solid #002772;
-  color: #002772;
-}
-.next-btn.men-btn:hover {
-  background: #002772;
-  color: #fff;
-}
-.next-btn.women-btn {
-  border: 3px solid #720060;
-  color: #720060;
-}
-.next-btn.women-btn:hover {
-  background: #720060;
-  color: #fff;
-}
-.next-btn.unavailable-btn {
-  border: 3px solid #1e1e1e;
-  color: #1e1e1e;
-}
-.next-btn.unavailable-btn:hover {
-  background: #1e1e1e;
-  color: #fff;
-}
 
 .product-card {
   /* Layout */
@@ -299,6 +230,8 @@ export default {
   font-weight: 600;
   color: #002772;
 }
+.card-title.men-title h2 { color: #002772; }
+.card-title.women-title h2 { color: #720060; }
 
 .card-info {
   /* Layout */
@@ -335,12 +268,6 @@ export default {
   color: #3f3f3f;
 }
 
-.circles {
-  /* Layout */
-  display: flex;
-  gap: 2px;
-}
-
 .circle {
   /* Layout */
   display: inline-block;
@@ -348,20 +275,16 @@ export default {
   /* Box Model */
   width: 18px;
   height: 18px;
-  border: 1px solid #002772;
   border-radius: 50%;
 
   /* Background */
-  background: #ffffff;
+  background: #fff;
 }
-
-.circle.filled {
-  /* Box Model */
-  border: 1px solid #002772;
-
-  /* Background */
-  background: #002772;
-}
+.circle.men-circle { border: 1px solid #002772; }
+.circle.men-circle.filled { background: #002772; border: 1px solid #002772; }
+.circle.women-circle { border: 1px solid #720060; }
+.circle.women-circle.filled { background: #720060; border: 1px solid #720060; }
+.circle.filled { background: #002772; border: 1px solid #002772; }
 
 .card-desc {
   /* Layout */
@@ -377,6 +300,19 @@ export default {
   line-height: 1.3;
   color: #1e1e1e;
 }
+
+.card-price {
+  /* Box Model */
+  padding: 10px 0;
+  border-top: 1px solid #00000033;
+
+  /* Typography */
+  font-family: "Inter", sans-serif;
+  font-size: 28px;
+  font-weight: 600;
+}
+.card-price.men-price { color: #002772; }
+.card-price.women-price { color: #720060; }
 
 .card-buttom {
   /* Layout */
@@ -407,52 +343,86 @@ export default {
   /* Box Model */
   width: 50%;
   padding: 10px 72px;
-  border: 3px solid #002772;
   border-radius: 6px;
 
   /* Typograhpy */
   font-family: "Inter", sans-serif;
   font-size: 20px;
   font-weight: 600;
-  color: #fff;
-
-  /* Background */
-  background: #002772;
 
   /* Visual */
   cursor: pointer;
   transition: 0.3s;
 }
-
-.buy-btn:hover {
-  /* Box Model */
-  width: 50%;
-  padding: 10px 72px;
+.buy-btn.men-btn {
   border: 3px solid #002772;
-  border-radius: 6px;
-
-  /* Typograhpy */
-  font-family: "Inter", sans-serif;
-  font-size: 20px;
-  font-weight: 600;
+  color: #fff;
+  background: #002772;
+}
+.buy-btn.men-btn:hover {
+  border: 3px solid #002772;
   color: #002772;
-
-  /* Background */
+  background: #fff;
+}
+.buy-btn.women-btn {
+  border: 3px solid #720060;
+  color: #fff;
+  background: #720060;
+}
+.buy-btn.women-btn:hover {
+  border: 3px solid #720060;
+  color: #720060;
   background: #fff;
 }
 
 .next-btn {
   /* Box Model */
   width: 50%;
-  padding: 10px 64px;
-  border: 3px solid #002772;
+  padding: 10px 72px;
   border-radius: 6px;
 
   /* Typograhpy */
   font-family: "Inter", sans-serif;
   font-size: 20px;
   font-weight: 600;
+
+  /* Visual */
+  cursor: pointer;
+  transition: 0.3s;
+}
+.next-btn.men-btn {
+  border: 3px solid #002772;
   color: #002772;
+  background: #fff;
+}
+.next-btn.men-btn:hover {
+  color: #fff;
+  background: #002772;
+}
+.next-btn.women-btn {
+  border: 3px solid #720060;
+  color: #720060;
+  background: #fff;
+}
+.next-btn.women-btn:hover {
+  color: #fff;
+  background: #720060;
+}
+.next-btn.unavailable-btn {
+  /* Layout */
+  position: relative;
+
+  /* Box Model */
+  width: 100%;
+  padding: 10px 64px;
+  border: 3px solid #1e1e1e;
+  border-radius: 6px;
+
+  /* Typograhpy */
+  font-family: "Inter", sans-serif;
+  font-size: 20px;
+  font-weight: 600;
+  color: #1e1e1e;
 
   /* Background */
   background: #fff;
@@ -461,23 +431,12 @@ export default {
   cursor: pointer;
   transition: 0.3s;
 }
-
-.next-btn:hover {
-  /* Box Model */
-  width: 50%;
-  padding: 10px 64px;
-  border: 3px solid #002772;
-  border-radius: 6px;
-
-  /* Typograhpy */
-  font-family: "Inter", sans-serif;
-  font-size: 20px;
-  font-weight: 600;
+.next-btn.unavailable-btn:hover {
+  background: #1e1e1e;
   color: #fff;
-
-  /* Background */
-  background: #002772;
 }
+
+/* Unavailable Product Styles */
 
 .card-content-unavailable {
   /* Layout */
@@ -535,44 +494,4 @@ export default {
   margin: 10px 0;
 }
 
-.btn-next-unavailable {
-  /* Layout */
-  position: relative;
-
-  /* Box Model */
-  width: 100%;
-  padding: 10px 64px;
-  border: 3px solid #1e1e1e;
-  border-radius: 6px;
-
-  /* Typograhpy */
-  font-family: "Inter", sans-serif;
-  font-size: 20px;
-  font-weight: 600;
-  color: #1e1e1e;
-
-  /* Background */
-  background: #fff;
-
-  /* Visual */
-  cursor: pointer;
-  transition: 0.3s;
-}
-
-.btn-next-unavailable:hover {
-  /* Box Model */
-  width: 100%;
-  padding: 10px 64px;
-  border: 3px solid #1e1e1e;
-  border-radius: 6px;
-
-  /* Typograhpy */
-  font-family: "Inter", sans-serif;
-  font-size: 20px;
-  font-weight: 600;
-  color: #fff;
-
-  /* Background */
-  background: #1e1e1e;
-}
 </style>
