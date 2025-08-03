@@ -62,7 +62,6 @@ export default {
       return this.products[this.currentIndex] || {};
     },
     isUnavailable() {
-      // Unavailable jika category bukan men/women clothing atau tidak ada rating
       if (!this.products || !this.products.length) return true;
       const cat = this.currentProduct.category || '';
       return !["men's clothing", "women's clothing"].includes(cat) || !this.currentProduct.rating;
@@ -124,13 +123,18 @@ export default {
 
 <style scoped>
 .section-bg {
+  /* Layout */
   display: flex;
   justify-content: center;
   align-items: center;
+
+  /* Box Model */
   width: auto;
   height: 65vh;
   margin: -8px;
   padding: 0;
+
+  /* Background */
   background-color: #D6E6FF;
 }
 .section-bg.men-bg { background-color: #D6E6FF; }
@@ -138,10 +142,14 @@ export default {
 .section-bg.unavailable-bg { background-color: #DCDCDC; }
 
 .card-title h2 {
+  /* Box Model */
   margin: 0 0 5px 0;
+
+  /* Typography */
   font-family: "Inter", sans-serif;
   font-size: 28px;
   font-weight: 600;
+  color: #002772;
 }
 .card-title.men-title h2 { color: #002772; }
 .card-title.women-title h2 { color: #720060; }
@@ -205,21 +213,6 @@ export default {
 .next-btn.unavailable-btn:hover {
   background: #1e1e1e;
   color: #fff;
-}
-.section-bg {
-  /* Layout */
-  display: flex;
-  justify-content: center;
-  align-items: center;
-
-  /* Box Model */
-  width: auto;
-  height: 65vh;
-  margin: -8px;
-  padding: 0;
-
-  /* Background */
-  background-color: #D6E6FF;
 }
 
 .product-card {
