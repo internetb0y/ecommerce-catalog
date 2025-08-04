@@ -52,47 +52,56 @@ export default {
       required: true
     }
   },
+  // Berfungsi untuk mengatur indeks produk saat ini
   data() {
     return {
       currentIndex: 0
     };
   },
   computed: {
+    // Mengambil produk saat ini berdasarkan indeks
     currentProduct() {
       return this.products[this.currentIndex] || {};
     },
+    // Memeriksa apakah produk saat ini tidak tersedia
     isUnavailable() {
       if (!this.products || !this.products.length) return true;
       const cat = this.currentProduct.category || '';
       return !["men's clothing", "women's clothing"].includes(cat) || !this.currentProduct.rating;
     },
+    // Mengatur kelas CSS untuk bagian latar belakang, judul, harga, tombol beli, dan tombol berikutnya
     sectionBgClass() {
       if (this.isUnavailable) return 'section-bg unavailable-bg';
       if (this.currentProduct.category === "men's clothing") return 'section-bg men-bg';
       if (this.currentProduct.category === "women's clothing") return 'section-bg women-bg';
       return 'section-bg';
     },
+    // Mengatur kelas CSS untuk judul, harga, dan tombol berdasarkan kategori produk
     cardTitleClass() {
       if (this.currentProduct.category === "men's clothing") return 'card-title men-title';
       if (this.currentProduct.category === "women's clothing") return 'card-title women-title';
       return 'card-title';
     },
+    // Mengatur kelas CSS untuk harga produk
     cardPriceClass() {
       if (this.currentProduct.category === "men's clothing") return 'card-price men-price';
       if (this.currentProduct.category === "women's clothing") return 'card-price women-price';
       return 'card-price';
     },
+    // Mengatur kelas CSS untuk tombol beli dan tombol berikutnya berdasarkan kategori produk
     buyBtnClass() {
       if (this.currentProduct.category === "men's clothing") return 'buy-btn men-btn';
       if (this.currentProduct.category === "women's clothing") return 'buy-btn women-btn';
       return 'buy-btn';
     },
+    // Mengatur kelas CSS untuk tombol berikutnya berdasarkan kategori produk dan ketersediaan
     nextBtnClass() {
       if (this.isUnavailable) return 'next-btn unavailable-btn';
       if (this.currentProduct.category === "men's clothing") return 'next-btn men-btn';
       if (this.currentProduct.category === "women's clothing") return 'next-btn women-btn';
       return 'next-btn';
     },
+    // Mengatur teks alternatif untuk gambar produk berdasarkan kategori
     altText() {
       if (this.currentProduct.category === "men's clothing") return 'Man Product Image';
       if (this.currentProduct.category === "women's clothing") return 'Woman Product Image';
@@ -100,6 +109,7 @@ export default {
     }
   },
   methods: {
+    // Berfungsi untuk beralih ke produk berikutnya
     nextProduct() {
       if (!this.products || this.products.length === 0) return;
       if (this.isUnavailable) {
@@ -114,6 +124,7 @@ export default {
         this.currentIndex++;
       }
     },
+    // Mengatur kelas CSS untuk lingkaran rating berdasarkan kategori dan nilai rating
     circleClass(i) {
       let base = 'circle';
       if (this.currentProduct.category === "men's clothing") base += ' men-circle';

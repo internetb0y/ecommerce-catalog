@@ -1,3 +1,4 @@
+import { shallowMount } from '@vue/test-utils';
 import AllSection from './AllSection.vue';
 
 const sampleProducts = [
@@ -57,7 +58,6 @@ describe('AllSection.vue', () => {
     const wrapper = shallowMount(AllSection, {
       propsData: { products: sampleProducts }
     });
-    // Move to third product (not men's or women's clothing)
     await wrapper.vm.nextProduct();
     await wrapper.vm.nextProduct();
     await wrapper.vm.$nextTick();
@@ -76,11 +76,9 @@ describe('AllSection.vue', () => {
     const wrapper = shallowMount(AllSection, {
       propsData: { products: sampleProducts }
     });
-    // Go to last product (unavailable)
     await wrapper.vm.nextProduct();
     await wrapper.vm.nextProduct();
     await wrapper.vm.$nextTick();
-    // nextProduct should emit next-category
     await wrapper.vm.nextProduct();
     expect(wrapper.emitted('next-category')).toBeTruthy();
   });
@@ -90,7 +88,6 @@ describe('AllSection.vue', () => {
       propsData: { products: sampleProducts }
     });
     const filled = wrapper.findAll('.circle.filled');
-    // For first product, rating is 4
     expect(filled.length).toBe(4);
   });
 });
