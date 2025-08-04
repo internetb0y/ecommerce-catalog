@@ -205,7 +205,7 @@ export default {
   /* Box Model */
   width: auto;
   height: auto;
-  margin-right: 15px;
+  margin-right: 45px;
 }
 
 .card-image img {
@@ -229,11 +229,12 @@ export default {
 
   /* Box Model */
   min-width: 350px;
+  margin: 15px 0;
 }
 
 .card-title h2 {
   /* Box Model */
-  margin: 0 0 5px 0;
+  margin: 0 0 15px 0;
 
   /* Typography */
   font-family: "Inter", sans-serif;
@@ -286,6 +287,7 @@ export default {
   /* Box Model */
   width: 18px;
   height: 18px;
+  margin: 0 1px;
   border-radius: 50%;
 
   /* Background */
@@ -302,6 +304,7 @@ export default {
   display: flex;
 
   /* Box Model */
+  overflow: auto;
   height: 100%;
 
   /* Typography */
