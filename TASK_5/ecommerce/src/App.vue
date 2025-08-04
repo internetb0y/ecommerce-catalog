@@ -3,7 +3,7 @@
     <div v-if="products.length > 0">
       <!-- Menampilkan seluruh produk dari AllSection komponen -->
       <AllSection 
-        :products="products"
+        :products="filteredProducts"
       />
     </div>
     <div v-else class="loading-message">

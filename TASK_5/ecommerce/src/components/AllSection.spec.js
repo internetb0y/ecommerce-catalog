@@ -1,6 +1,9 @@
+// File ini adalah bagian dari proyek ecommerce-catalog
 import { shallowMount } from '@vue/test-utils';
+// Mengimpor komponen AllSection yang akan diuji
 import AllSection from './AllSection.vue';
 
+// Contoh data produk yang akan digunakan dalam pengujian
 const sampleProducts = [
   {
     id: 1,
@@ -31,8 +34,9 @@ const sampleProducts = [
   }
 ];
 
+// Deskripsi dari pengujian yang akan dilakukan pada komponen AllSection
 describe('AllSection.vue', () => {
-  it('renders product details for men\'s clothing', () => {
+  it('renders product untuk men\'s clothing', () => {
     const wrapper = shallowMount(AllSection, {
       propsData: { products: sampleProducts }
     });
@@ -42,7 +46,7 @@ describe('AllSection.vue', () => {
     expect(wrapper.find('.card-desc').text()).toBe('A nice men shirt');
   });
 
-  it('renders product details for women\'s clothing after nextProduct', async () => {
+  it('renders product untuk women\'s clothing setelah nextProduct', async () => {
     const wrapper = shallowMount(AllSection, {
       propsData: { products: sampleProducts }
     });
@@ -54,7 +58,7 @@ describe('AllSection.vue', () => {
     expect(wrapper.find('.card-desc').text()).toBe('A beautiful dress');
   });
 
-  it('shows unavailable message for non-clothing category', async () => {
+  it('menampilkan pesan unavailable untuk kategori yang tidak sesuai', async () => {
     const wrapper = shallowMount(AllSection, {
       propsData: { products: sampleProducts }
     });
@@ -65,14 +69,14 @@ describe('AllSection.vue', () => {
     expect(wrapper.find('.card-desc-unavailable').text()).toContain('unavailable');
   });
 
-  it('shows unavailable message if products is empty', () => {
+  it('menampilkan pesan jika produk kosong', () => {
     const wrapper = shallowMount(AllSection, {
       propsData: { products: [] }
     });
     expect(wrapper.find('.card-desc-unavailable').exists()).toBe(true);
   });
 
-  it('emits next-category when nextProduct is called at end', async () => {
+  it('mengeluarkan next category saat nextProduct dipanggil di akhir', async () => {
     const wrapper = shallowMount(AllSection, {
       propsData: { products: sampleProducts }
     });
@@ -83,7 +87,7 @@ describe('AllSection.vue', () => {
     expect(wrapper.emitted('next-category')).toBeTruthy();
   });
 
-  it('renders correct number of filled circles for rating', () => {
+  it('redeers jumlah lingkaran yang benar berdasarkan rating', () => {
     const wrapper = shallowMount(AllSection, {
       propsData: { products: sampleProducts }
     });
